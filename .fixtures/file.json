@@ -1,0 +1,12 @@
+[
+    {
+        "model": "file.file",
+        "pk": 1,
+        "fields": {
+            "file": "2023/7/4/51b061b7-97c2-4c67-bd17-1be3acb61e3e.jpg",
+            "format": "jpg",
+            "name": "id_1",
+            "ordering": 1
+        }
+    }
+]
