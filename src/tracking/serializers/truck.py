@@ -21,7 +21,6 @@ class TruckIssueSerializer(serializers.ModelSerializer):
         return validated_data
 
 
-
 class TrailerIssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrailerIssue

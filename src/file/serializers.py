@@ -4,10 +4,9 @@ from file.models import File
 
 
 class FileFieldSerializer(serializers.FileField):
-
     def __init__(self, context, *args, **kwargs):
         super(FileFieldSerializer, self).__init__(*args, **kwargs)
-        self.request = self.context['request']
+        self.request = context['request']
         self.width = self.request.GET.get('width')
         self.height = self.request.GET.get('height')
 
@@ -21,18 +20,24 @@ class FileSerializer(serializers.ModelSerializer):
         model = File
         fields = [
             'id',
-            'file',
+            'image',
             'format',
             'name',
             'ordering'
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(FileSerializer, self).__init__(*args, **kwargs)
+        self.request = self.context['request']
+        if getattr(self.request, 'method', None) == 'GET':
+            self.fields['image'] = FileFieldSerializer(context=self.context)
+
 
 class FileUrlSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = (
+        fields = [
             'id',
             'name',
-            'file'
-        )
+            'image'
+        ]

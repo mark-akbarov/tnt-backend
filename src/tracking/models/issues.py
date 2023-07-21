@@ -1,11 +1,6 @@
 from django.db import models
 
 
-class IssueType(models.TextChoices):
-    TRUCK = 'Truck'
-    TRAILER = 'Trailer'
-
-
 class TruckIssues(models.TextChoices):
     ELECTRICAL_ISSUE = 'Electrical'
     FUEL_RELATED_ISSUE = 'Fuel Related'

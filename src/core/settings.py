@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.getenv('DB_NAME', 'issue_tracker_db'),
-        'USER': os.getenv('DB_USER', 'issue_tracker_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', '2404'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432')
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT')
     }
 }
 
@@ -157,6 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_TOKEN = '6132089516:AAEZYK8zYIEJ3PcNcsMkNJUbj_7w7QR8-7M'
 CHAT_ID = '773424440'
+
 
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'your_project.urls.swagger_info',  # Replace 'your_project.urls.swagger_info' with the path to your info dictionary (see next step)

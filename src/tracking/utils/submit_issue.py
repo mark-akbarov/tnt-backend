@@ -21,7 +21,7 @@ Unit ID: {driver.unit_id}
 VIN ID: {driver.vin_id}
 Created Time: {format_datetime(truck_issue.created_at)}
 """
-    bot.send_media_group(chat_id=settings.CHAT_ID, media=format_photos(truck_issue.photos.all(), caption=text))
+    bot.send_media_group(chat_id=settings.CHAT_ID, media=send_compressed_photos(photos, caption=text))
 
 
 def submit_trailer_issue(driver: User, issue: str, photos: list, status: str):
@@ -36,13 +36,12 @@ Unit ID: {driver.unit_id}
 VIN ID: {driver.vin_id}
 Created Time: {format_datetime(trailer_issue.created_at)}
 """
-    bot.send_media_group(chat_id=settings.CHAT_ID, media=format_photos(trailer_issue.photos.all(), caption=text))
+    bot.send_media_group(chat_id=settings.CHAT_ID, media=send_compressed_photos(trailer_issue.photos.all(), caption=text))
 
 
-def format_photos(photos: list, caption: str) -> list:
-    photo_paths = [f"{photo.file}" for photo in photos]
-    return [telebot.types.InputMediaPhoto(open(f"../media/{photo_paths[num]}", "rb"), caption=caption if num == 0 else '') \
-        for num in range(len(photo_paths))]
+def send_compressed_photos(photos: list, caption: str):
+    photo_paths = [f"../media/{photo.image}" for photo in photos]
+    return [telebot.types.InputMediaPhoto(open(f"{photo_paths[num]}", "rb"), caption=caption if num == 0 else '') for num in range(len(photo_paths))]
 
 
 def format_datetime(created_time: str) -> str:
