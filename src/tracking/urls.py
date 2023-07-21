@@ -6,10 +6,10 @@ from tracking.views.truck import TruckIssueModelViewSet, TrailerIssueModelViewSe
 
 
 router = DefaultRouter()
-router.register('truck', TruckIssueModelViewSet)
-router.register('trailer', TrailerIssueModelViewSet)
+router.register('trucks', TruckIssueModelViewSet)
+router.register('trailers', TrailerIssueModelViewSet)
 
 urlpatterns = [
-   path('issue/', include(router.urls)),
+   path('issues/', include(router.urls)),
 ]
 
