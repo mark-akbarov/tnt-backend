@@ -32,6 +32,8 @@ urlpatterns = [
     path('api/v1/file/', include('file.urls')),
     path('api/v1/auth/', include('user.urls')),
     path('api/v1/tracking/', include('tracking.urls')),
+    
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
