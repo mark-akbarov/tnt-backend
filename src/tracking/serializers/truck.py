@@ -22,7 +22,7 @@ class TruckIssueSerializer(serializers.ModelSerializer):
         if driver_instance:
             submit_truck_issue(driver=driver_instance, **validated_data)
         else:
-            raise serializers.ValidationError('You must logged in as driver to perform this action.')
+            raise serializers.ValidationError('You must be logged in as driver to perform this action.')
         return validated_data
 
 

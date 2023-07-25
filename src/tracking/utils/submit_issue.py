@@ -7,7 +7,7 @@ from user.models.driver import Driver
 from tracking.models.truck import TrailerIssue, TruckIssue
 
 
-bot = telebot.TeleBot(settings.API_TOKEN)
+bot = telebot.TeleBot(settings.TRACKING_BOT_API_TOKEN)
 
 
 def submit_truck_issue(driver: Driver, issue: str, photos: list, status: str):
