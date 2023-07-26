@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from user.models.driver import Driver
+from user.models.user import User
 from hometime.models.hometime import HomeTime
 from hometime.utils.submit_request import submit_request
 
@@ -32,10 +32,6 @@ class HomeTimeRequestSerializer(serializers.ModelSerializer):
         ]
         
     def create(self, validated_data):
-        driver = self.context['request'].user
-        driver_instance = Driver.objects.filter(profile=driver).first()
-        if driver_instance:
-            submit_request(driver=driver_instance, **validated_data)
-        else:
-            raise serializers.ValidationError('You must be logged in as driver to perform this action.')
+        user = self.context['request'].user
+        submit_request(driver=user, **validated_data)
         return validated_data

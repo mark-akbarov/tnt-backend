@@ -4,15 +4,15 @@ from django.utils import timezone
 import telebot
 
 from hometime.models.hometime import HomeTime
-from user.models.driver import Driver
+from user.models.user import User
 
 
 bot = telebot.TeleBot(settings.HOMETIME_BOT_API_TOKEN)
-chat_id = settings.CHAT_ID
+chat_id = settings.HOMETIME_CHAT_ID
 
 
 def submit_request(
-    driver: Driver, 
+    driver: User, 
     reason: str, 
     location_by_state: str, 
     start_date: str, 
@@ -23,7 +23,7 @@ def submit_request(
         driver=driver, 
         reason=reason, 
         location_by_state=location_by_state, 
-        start_date=start_date, 
+        start_date=start_date,
         return_date=return_date
         )
     text = f"""

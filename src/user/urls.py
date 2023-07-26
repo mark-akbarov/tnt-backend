@@ -1,10 +1,10 @@
-from django.urls import path, include
-
+from django.urls import path
 
 from user.views.otp import OTPSignupView, OTPVerificationAPIView
 from user.views.signup import SignupAPIView
 from user.views.login import LoginAPIView
 from user.views.verification import VerifyUserAPIView, ReSendVerifyUserAPIView
+
 
 urlpatterns = [    
     path('otp/', OTPSignupView.as_view(), name='otp_signup'),

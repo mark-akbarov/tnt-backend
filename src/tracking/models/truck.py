@@ -5,7 +5,7 @@ from tracking.models.issues import TrailerIssues, TruckIssues, IssueStatus
 
 
 class TruckIssue(BaseModel):
-    driver = models.ForeignKey('user.Driver', on_delete=models.CASCADE, related_name='truck_issues')
+    driver = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='truck_issues')
     issue = models.CharField(max_length=50, choices=TruckIssues.choices)
     status = models.CharField(max_length=50, choices=IssueStatus.choices, default=IssueStatus.OPEN)
     photos = models.ManyToManyField('file.File')
@@ -19,7 +19,7 @@ class TruckIssue(BaseModel):
     
 
 class TrailerIssue(BaseModel):
-    driver = models.ForeignKey('user.Driver', on_delete=models.CASCADE, related_name='trailer_issues')
+    driver = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='trailer_issues')
     issue = models.CharField(max_length=50, choices=TrailerIssues.choices)
     status = models.CharField(max_length=50, choices=IssueStatus.choices, default=IssueStatus.OPEN)
     photos = models.ManyToManyField('file.File')

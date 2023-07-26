@@ -16,7 +16,7 @@ class Reason(models.TextChoices):
 
 
 class HomeTime(BaseModel):
-    driver = models.ForeignKey('user.Driver', on_delete=models.CASCADE, related_name='hometime_requests')
+    driver = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='hometime_requests')
     reason = models.CharField(max_length=255, choices=Reason.choices, default=Reason.HOS)
     status = models.CharField(max_length=50, choices=RequestStatus.choices, default=RequestStatus.WAITING_FOR_APPROVAL)
     location_by_state = models.CharField(max_length=255)

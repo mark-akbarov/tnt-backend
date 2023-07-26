@@ -46,7 +46,6 @@ def check_verify_signup_code(email, code):
         user = verify.user
         user.is_active = True
         user.save()
-
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
     else:
