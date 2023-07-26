@@ -1,14 +1,12 @@
-from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
 from user.serializers.signup import SignupSerializer
-from user.utils.signup import signup
+from user.models.user import User
 
 
-class SignupAPIView(APIView):
+class SignupAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = SignupSerializer
     permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = SignupSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return signup(**serializer.validated_data)

@@ -6,8 +6,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
-from ..models.base import User
-from ..models.otp_verification import OTPVerification
+from user.models.user import User
+from user.models.otp import OTPVerification
 
 
 def otp_signup(phone_number: str):

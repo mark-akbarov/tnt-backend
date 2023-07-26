@@ -1,42 +1,22 @@
 from random import randint
 
+from django.core.mail import send_mail
 from django.conf import settings
 
-from mailjet_rest import Client
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+
 from user.models import VerifyUser, User
 
 
-def send_email(recipient_email: str, code: str):
-    api_key = settings.MAILJET_API_KEY
-    api_secret = settings.MAILJET_SECRET_KEY
-    mailjet = Client(auth=(api_key, api_secret), version='v3')
-    data = {
-    'FromEmail': "",
-    'FromName': "Your Verification Code",
-    'Recipients': [
-        {
-        "Email": recipient_email,
-        "Name": "Someone"
-        }
-    ],
-    'Subject': "Verification Code",
-    'Html-part': f"<h3>Verification Code: <b>{code}</b>"
-    }
-    result = mailjet.send.create(data=data)
-    if result.status_code == '200':
-        return "success"
-
-
-def send_user_verify_code(user, is_forgot_password=False):
+def send_user_verify_code(user: User, is_forgot_password=False):
     code = randint(100_000, 999_999)
     if is_forgot_password is False:
         VerifyUser.objects.create(
             user=user,
-            code=f'verify_username_{code}',
+            code=f'verify_user_{code}',
             is_active=False
         )
     elif is_forgot_password is True:
@@ -45,13 +25,18 @@ def send_user_verify_code(user, is_forgot_password=False):
             code=f'forgot_password_{code}',
             is_active=False
         )
-    print(code)
+    send_mail(
+        subject="Verification Code", 
+        message=f"Here is your verification code {code}.", 
+        from_email=settings.EMAIL_HOST_USER, 
+        recipient_list=[user.email,]
+        )
 
 
 def check_verify_signup_code(email, code):
     check = VerifyUser.objects.filter(
         user__email=email,
-        code=f'verify_username_{code}',
+        code=f'verify_user_{code}',
         is_active=False
     )
     if check.exists():
@@ -65,7 +50,12 @@ def check_verify_signup_code(email, code):
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
     else:
-        return Response({'detail': 'invalid code'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            "type": "E_INVALID_CODE.", 
+            "message": "The code provided is invalid, please check carefully."
+            }, 
+            status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 def check_verify_forgot_password_code(email, code):

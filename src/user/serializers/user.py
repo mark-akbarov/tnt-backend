@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from file.serializers import FileSerializer
-from user.models.base import User
+from user.models.user import User
 
 
 class UserSerializer(serializers.ModelSerializer):
