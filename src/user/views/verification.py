@@ -14,10 +14,9 @@ class VerifyUserAPIView(APIView):
 
 
 class ReSendVerifyUserAPIView(APIView):
-    serializer_class = ReSendVerifyUserSerializer
     permission_classes = [AllowAny]
 
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = ReSendVerifyUserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         return re_send_verify_user_code(**serializer.validated_data)

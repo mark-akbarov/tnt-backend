@@ -9,7 +9,7 @@ from user.models.user import User
 
 def login(username: str, password, is_superuser=False):
     try:
-        if '@' in username and User.objects.filter(username=username).exists():
+        if username and User.objects.filter(username=username).exists():
             user = User.objects.get(username=username)
         else:
             user = User.objects.get(username=username)

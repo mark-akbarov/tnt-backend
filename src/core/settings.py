@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    },  
 ]
 
 REST_FRAMEWORK = {
@@ -160,8 +160,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Telegram Bot API credentials
 
 TRACKING_BOT_API_TOKEN = os.getenv('TRACKING_BOT_API_TOKEN')
-HOMETIME_BOT_API_TOKEN = os.getenv('HOMETIME_BOT_API_TOKEN')
 TRACKING_CHAT_ID = os.getenv('TRACKING_CHAT_ID')
+
+HOMETIME_BOT_API_TOKEN = os.getenv('HOMETIME_BOT_API_TOKEN')
 HOMETIME_CHAT_ID = os.getenv('HOMETIME_CHAT_ID')
 
 
