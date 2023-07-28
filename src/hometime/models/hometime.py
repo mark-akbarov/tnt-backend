@@ -20,8 +20,6 @@ class HomeTime(BaseModel):
     reason = models.CharField(max_length=255, choices=Reason.choices, default=Reason.HOS)
     status = models.CharField(max_length=50, choices=RequestStatus.choices, default=RequestStatus.WAITING_FOR_APPROVAL)
     location_by_state = models.CharField(max_length=255)
-    longitude = models.CharField(max_length=25)
-    latitude = models.CharField(max_length=25)
     start_date = models.DateField()
     return_date = models.DateField()
     

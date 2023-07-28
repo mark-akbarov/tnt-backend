@@ -12,8 +12,6 @@ class HomeTimeCoreSerializer(serializers.ModelSerializer):
             'id',
             'driver',
             'reason',
-            'longitude',
-            'latitude',
             'start_time',
             'return_time'
         ]
