@@ -2,7 +2,6 @@ from django.conf import settings
 
 import telebot
 
-
 from user.models.user import User
 from tracking.models.truck import TrailerIssue, TruckIssue
 
@@ -22,6 +21,7 @@ Status: {truck_issue.status}
 Unit ID: {driver.unit_id}
 VIN ID: {driver.vin_id}
 Created Time: {truck_issue.created_at.strftime("%B %d, %Y %I:%M %p")}
+Updated Time: {truck_issue.updated_at.strftime("%B %d, %Y %I:%M %p")}
     """
     bot.send_media_group(chat_id=chat_id, media=send_compressed_photos(photos, caption=text))
 
@@ -37,6 +37,7 @@ Status: {trailer_issue.status}
 Unit ID: {driver.unit_id}
 VIN ID: {driver.vin_id}
 Created Time: {trailer_issue.created_at.strftime("%B %d, %Y %I:%M %p")}
+Updated Time: {trailer_issue.updated_at.strftime("%B %d, %Y %I:%M %p")}
     """
     bot.send_media_group(chat_id=chat_id, media=send_compressed_photos(trailer_issue.photos.all(), caption=text))
    

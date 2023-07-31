@@ -1,19 +1,22 @@
 from rest_framework import serializers
 
-from user.models.user import User
+from user.serializers.user import UserSerializer
 from hometime.models.hometime import HomeTime
 from hometime.utils.submit_request import submit_request
 
 
 class HomeTimeCoreSerializer(serializers.ModelSerializer):
+    driver = UserSerializer()
+    
     class Meta:
         model = HomeTime
         fields = [
             'id',
             'driver',
             'reason',
-            'start_time',
-            'return_time'
+            'location_by_state',
+            'start_date',
+            'return_date',
         ]
         
 
