@@ -16,7 +16,7 @@ class TruckIssue(BaseModel):
 
     def __str__(self) -> str:
         return str(self.id)
-    
+
 
 class TrailerIssue(BaseModel):
     driver = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='trailer_issues')
@@ -30,3 +30,4 @@ class TrailerIssue(BaseModel):
         
     def __str__(self) -> str:
         return str(self.id)
+

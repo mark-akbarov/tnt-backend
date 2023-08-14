@@ -16,8 +16,9 @@ def submit_truck_issue(driver: User, issue: str, photos: list, status: str):
     text = f"""
 Truck Issue ID: {truck_issue.id}
 Driver: {driver}
+Driver Type: {driver.driver_type}
 Issue Type: {issue}
-Status: {truck_issue.status}
+Issue Status: {truck_issue.status}
 Unit ID: {driver.unit_id}
 VIN ID: {driver.vin_id}
 Created Time: {truck_issue.created_at.strftime("%B %d, %Y %I:%M %p")}
@@ -32,6 +33,7 @@ def submit_trailer_issue(driver: User, issue: str, photos: list, status: str):
     text = f"""
 Trailer Issue ID: {trailer_issue.id}
 Driver: {driver}
+Driver Type: {driver.driver_type}
 Issue Type: {issue}
 Status: {trailer_issue.status}
 Unit ID: {driver.unit_id}
@@ -40,7 +42,7 @@ Created Time: {trailer_issue.created_at.strftime("%B %d, %Y %I:%M %p")}
 Updated Time: {trailer_issue.updated_at.strftime("%B %d, %Y %I:%M %p")}
     """
     bot.send_media_group(chat_id=chat_id, media=send_compressed_photos(trailer_issue.photos.all(), caption=text))
-   
+
 
 def send_compressed_photos(photos: list, caption: str):
     photo_paths = [f"../media/{photo.image}" for photo in photos]
